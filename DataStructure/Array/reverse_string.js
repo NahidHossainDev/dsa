@@ -18,10 +18,11 @@ function reverseString(str) {
 
 // Using Js Buildin methods
 function reverseString2(str) {
-	if (str.length > 1) return str.split("").reverse().join("");
-	else {
-		return !!str ? str : null;
-	}
+	return str.split("").reverse().join("");
 }
 
-console.log(reverseString2("ab"));
+// Method 3
+const reverseString3 = (str) => [...str].reverse().join("");
+
+// console.log([...a]);
+console.log(reverseString3("ab"));
