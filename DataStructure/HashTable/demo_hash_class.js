@@ -15,12 +15,33 @@ class HashTable {
 
 	set(key, value) {
 		const index = this._hash(key);
-		this.data[index] = [key, value];
+		if (!this.data[index]) this.data[index] = [];
+		this.data[index].push([key, value]);
+		return this.data;
 	}
 
 	get(key) {
 		const index = this._hash(key);
-		return this.data[index];
+		const currentBucket = this.data[index];
+		if (currentBucket) {
+			for (let i = 0; i < currentBucket.length; i++) {
+				if (currentBucket[i][0] === key) {
+					return currentBucket[i][1];
+				}
+			}
+		}
+		return undefined;
+	}
+
+	keys() {
+		const keysArray = [];
+		for (let i = 0; i < this.data.length; i++) {
+			if (this.data[i]) {
+				console.log(this.data[i][0][0]);
+				keysArray.push(this.data[i][0]);
+			}
+		}
+		return keysArray;
 	}
 }
 
