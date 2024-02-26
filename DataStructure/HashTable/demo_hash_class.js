@@ -52,6 +52,7 @@ myHashTable.set("nahid6hdghdghdghdghdghD", "nahid6hdghdghdghdghdghD");
 myHashTable.set("nahid", "nahid");
 myHashTable.set("hossain", "hossain");
 myHashTable.set("adfadf", "adfadf");
+myHashTable.keys();
 
 myHashTable.get("grapes");
 
