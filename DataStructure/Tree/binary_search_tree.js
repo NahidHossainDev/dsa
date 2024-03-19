@@ -143,6 +143,68 @@ class BinarySearchTree {
 			}
 		}
 	}
+
+	breadthFirstSearch() {
+		let currentNode = null;
+		let list = [];
+		let queue = [this.root];
+
+		while (queue.length > 0) {
+			currentNode = queue.shift();
+			list.push(currentNode.value);
+			if (currentNode.left) {
+				queue.push(currentNode.left);
+			}
+			if (currentNode.right) {
+				queue.push(currentNode.right);
+			}
+		}
+		return list;
+	}
+
+	breadthFirstSearchR(queue, list) {
+		if (queue.length == 0) return list;
+		let currentNode = queue.shift();
+		list.push(currentNode.value);
+		if (currentNode.left) {
+			queue.push(currentNode.left);
+		}
+		if (currentNode.right) {
+			queue.push(currentNode.right);
+		}
+		return this.breadthFirstSearchR(queue, list);
+	}
+
+	DFSInOrder() {
+		return traverseInOrder(this.root, []);
+	}
+	DFSPreOrder() {
+		return traversePreOrder(this.root, []);
+	}
+	DFSPostOrder() {
+		return traversePostOrder(this.root, []);
+	}
+}
+
+function traverseInOrder(node, list) {
+	if (node.left) traverseInOrder(node.left, list);
+	list.push(node.value);
+	if (node.right) traverseInOrder(node.right, list);
+	return list;
+}
+
+function traversePreOrder(node, list) {
+	list.push(node.value);
+	if (node.left) traversePreOrder(node.left, list);
+	if (node.right) traversePreOrder(node.right, list);
+	return list;
+}
+
+function traversePostOrder(node, list) {
+	if (node.left) traversePostOrder(node.left, list);
+	if (node.right) traversePostOrder(node.right, list);
+	list.push(node.value);
+	return list;
 }
 
 const tree = new BinarySearchTree();
@@ -156,7 +218,14 @@ tree.insert(1);
 // tree.remove(170);
 const searchedVal = tree.lookup(20);
 // JSON.stringify(traverse(tree.root));
-console.log(JSON.stringify(searchedVal));
+// console.log(JSON.stringify(searchedVal));
+// console.log(tree.breadthFirstSearch());
+// console.log(tree.breadthFirstSearchR([tree.root], []));
+
+console.log(tree.DFSInOrder());
+console.log(tree.DFSPreOrder());
+console.log(tree.DFSPostOrder());
+
 //     9
 //  4     20
 //1  6  15  170
