@@ -1,13 +1,13 @@
 const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
-function mergeSort(array) {
+function quickSort(array) {
 	if (array.length === 1) return array;
 	// Split Array in into right and left
 	const mid = Math.floor(array.length / 2);
 	const left = array.slice(0, mid);
 	const right = array.slice(mid);
 
-	return merge(mergeSort(left), mergeSort(right));
+	return merge(quickSort(left), quickSort(right));
 }
 
 function merge(left, right) {
@@ -28,4 +28,4 @@ function merge(left, right) {
 	return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
 
-console.log(mergeSort(numbers));
+console.log(quickSort(numbers));

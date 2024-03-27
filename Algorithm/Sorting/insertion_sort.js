@@ -1,13 +1,16 @@
 const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
-function mergeSort(array) {
+function insertionSort(array) {
 	const length = array.length;
 	for (let i = 0; i < length; i++) {
+		// If the selected item smaller than the first item move item to the first position
 		if (array[i] < array[0]) array.unshift(array.splice(i, 1)[0]);
 		else {
-			for (let k = 1; k < length; k++) {
-				if (array[i] > array[k - 1] && array[i] < array[k]) {
-					array.splice(k, 0, array.splice(i, 1)[0]);
+			// Find where item should go
+			for (let j = 1; j < length; j++) {
+				if (array[i] > array[j - 1] && array[i] < array[j]) {
+					// Move item to the right position
+					array.splice(j, 0, array.splice(i, 1)[0]);
 				}
 			}
 		}
@@ -15,4 +18,4 @@ function mergeSort(array) {
 	return array;
 }
 
-console.log(mergeSort(numbers));
+console.log(insertionSort(numbers));
