@@ -27,7 +27,7 @@ class LinkedList {
 	constructor() {
 		this.head = null;
 		this.size = 0;
-		this.tail = this.head;
+		this.tail = null;
 	}
 
 	isEmpty() {
@@ -40,6 +40,7 @@ class LinkedList {
 	// O(1)
 	prepend(value) {
 		const newNode = new Node(value);
+		if (this.isEmpty()) this.tail = newNode;
 		newNode.next = this.head;
 		this.head = newNode;
 		this.size++;
@@ -49,12 +50,10 @@ class LinkedList {
 		const newNode = new Node(value);
 		if (this.isEmpty()) {
 			this.head = newNode;
+			this.tail = newNode;
 		} else {
-			let prevNode = this.head;
-			while (prevNode.next) {
-				prevNode = prevNode.next;
-			}
-			prevNode.next = newNode;
+			this.tail.next = newNode;
+			this.tail = newNode;
 		}
 		this.size++;
 	}
@@ -76,11 +75,17 @@ class LinkedList {
 		}
 	}
 
+	// O(n)
 	remove(index) {
 		if (index < 0 || index >= this.size) return null;
 		else if (index === 0) {
 			const toRemove = this.head;
-			this.head = this.head.next;
+			if (this.size === 1) {
+				this.head = null;
+				this.tail = null;
+			} else {
+				this.head = this.head.next;
+			}
 			this.size--;
 			return toRemove.value;
 		} else {
